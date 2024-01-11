@@ -2,6 +2,8 @@
 import {Button, TypographyTitle, Input, message} from "ant-design-vue";
 import ServerList from "../ServerList.vue";
 import {getServerStatus} from "../../js/Requests/Server.js"
+import {login} from "../../js/Requests/Users.js"
+import {removeSavedServer, createServerInstance} from "../../js/savedServerManager.js"
 import {ref} from "vue"
 
 const currentServerName = ref("")
@@ -33,15 +35,26 @@ function handleLogin() {
     isLoggingIn.value = true
     getServerStatus(currentServerAddress.value, currentServerPort.value).then((res) => {
         console.log(res)
-        message.info("已获取服务器状态，正在登录...")
-        isLoggingIn.value = false
-        
+        login(userInfo.value.username, userInfo.value.password).then((res) => {
+            console.log(res)
+            message.success("登录成功！")
+            isLoggingIn.value = false
+        }).catch((err) => {
+            console.log(err)
+            message.error("登录失败！")
+            isLoggingIn.value = false
+        })
     }).catch((err) => {
         console.log(err)
-        message.error("无法连接到服务器！")
+        message.error("无法连接到服务器！确保服务器地址与端口号正确")
         isLoggingIn.value = false
     })
 
+}
+
+function handleDeleteServer() {
+    removeSavedServer(createServerInstance(currentServerName.value, currentServerAddress.value, currentServerPort.value))
+    // TODO: switch to select server
 }
 </script>
 <template>
@@ -67,6 +80,7 @@ function handleLogin() {
                 <Input.Password v-model:value="userInfo.password" placeholder="请输入密码"/>
                 <Button type="primary" style="margin-top: 10px;" @click="handleLogin" :loading="isLoggingIn">登录</Button>
                 <Button type="link" style="margin-top: 10px;" @click="switchToSelect">返回服务器列表</Button>
+                <Button type="link" style="margin-top: 10px;" danger>删除服务器</Button>
             </div>
         </div>
     </div>
