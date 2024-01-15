@@ -15,4 +15,20 @@ function login(username, password) {
     });
 }
 
-export { login }
+function loginWithToken(serverAddress, token) {
+    return new Promise((resolve, reject) => {
+        axios.post(`${serverAddress}/users/loginWithToken`, {
+            token: token
+        }, {
+            headers: {
+                "Authorization": token
+            }
+        }).then((response) => {
+            resolve(response.data);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
+export { login, loginWithToken }
