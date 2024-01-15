@@ -5,6 +5,9 @@ import {getServerStatus} from "../../js/Requests/Server.js"
 import {login} from "../../js/Requests/Users.js"
 import {removeSavedServer, createServerInstance} from "../../js/savedServerManager.js"
 import {ref} from "vue"
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 const currentServerName = ref("")
 const currentServerAddress = ref("")
@@ -38,7 +41,8 @@ function handleLogin() {
         login(userInfo.value.username, userInfo.value.password).then((res) => {
             console.log(res)
             message.success("登录成功！")
-            isLoggingIn.value = false
+            router.push("/app")
+            
         }).catch((err) => {
             console.log(err)
             message.error("登录失败！")
