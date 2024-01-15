@@ -1,5 +1,5 @@
 <script setup>
-import {Button, TypographyTitle, Input, message} from "ant-design-vue";
+import {Button, TypographyTitle, Input, message, Modal} from "ant-design-vue";
 import ServerList from "../ServerList.vue";
 import {getServerStatus} from "../../js/Requests/Server.js"
 import {login} from "../../js/Requests/Users.js"
@@ -60,8 +60,16 @@ function handleLogin() {
 }
 
 function handleDeleteServer() {
-    removeSavedServer(createServerInstance(currentServerName.value, currentServerAddress.value, currentServerPort.value))
-    // TODO: switch to select server
+    Modal.confirm({
+        title: "确认删除服务器？",
+        content: "删除后将无法使用该服务器",
+        okText: "确认",
+        cancelText: "取消",
+        onOk: () => {
+            removeSavedServer(createServerInstance(currentServerName.value, currentServerAddress.value, currentServerPort.value))
+            router.go(0)
+        }
+    })
 }
 </script>
 <template>
@@ -87,7 +95,7 @@ function handleDeleteServer() {
                 <Input.Password v-model:value="userInfo.password" placeholder="请输入密码"/>
                 <Button type="primary" style="margin-top: 10px;" @click="handleLogin" :loading="isLoggingIn">登录</Button>
                 <Button type="link" style="margin-top: 10px;" @click="switchToSelect">返回服务器列表</Button>
-                <Button type="link" style="margin-top: 10px;" danger>删除服务器</Button>
+                <Button type="link" style="margin-top: 10px;" danger @click="handleDeleteServer">删除服务器</Button>
             </div>
         </div>
     </div>
