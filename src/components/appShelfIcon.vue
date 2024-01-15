@@ -2,12 +2,19 @@
 
 </script>
 <template>
-    
+    <div class="app-btn-container">
+        <div class="icon">
+            <slot name="icon"></slot>
+        </div>
+        <div class="title">
+            <slot name="title"></slot>
+        </div>
+    </div>
 </template>
 <style>
 .app-btn-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 50px;

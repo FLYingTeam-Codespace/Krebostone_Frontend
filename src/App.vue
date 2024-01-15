@@ -14,7 +14,9 @@ const currentLocale = ref(zhCN)
     }
   }" :locale="currentLocale">
     <Headers/>
-    <router-view/>
+    <div class="appBody">
+      <router-view/>
+    </div>
   </ConfigProvider>
 </template>
 
@@ -30,5 +32,8 @@ body {
   flex-direction: column;
   width: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.appBody {
+  margin-top: 65px;
 }
 </style>

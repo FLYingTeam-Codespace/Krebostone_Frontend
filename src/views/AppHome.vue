@@ -1,9 +1,11 @@
 <script setup>
 import appShelf from '@/components/appShelf.vue';
+import appContainer from '@/components/appContainer.vue';
 </script>
 <template>
 <div class="main-container">
     <appShelf/>
+    <appContainer/>
 </div>
 </template>
 <style>
@@ -12,7 +14,7 @@ import appShelf from '@/components/appShelf.vue';
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 98vh;
+    height: 91vh;
     width: 100%;
     background-color: #0062c33f;
     padding: 10px;
