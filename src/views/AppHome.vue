@@ -5,7 +5,11 @@ import appContainer from '@/components/appContainer.vue';
 <template>
 <div class="main-container">
     <appShelf/>
-    <appContainer/>
+    <appContainer>
+        <RouterView>
+            
+        </RouterView>
+    </appContainer>
 </div>
 </template>
 <style>

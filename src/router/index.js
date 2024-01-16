@@ -9,8 +9,15 @@ const routes = [
   },
   {
     path: "/app",
-    "name": "app",
+    name: "app",
     component: () => import("../views/AppHome.vue"),
+    children: [
+      {
+        path: "dashboard",
+        name: "dashboard",
+        component: () => import("../views/home/overview.vue")
+      }
+    ],
   }
 ]
 

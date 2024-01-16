@@ -44,7 +44,7 @@ function handleLogin() {
             message.success("登录成功！")
             cacheToken(res.data.data.token)
             isLoggingIn.value = false
-            router.push("/app")
+            router.push("/app/dashboard")
             
         }).catch((err) => {
             console.log(err)

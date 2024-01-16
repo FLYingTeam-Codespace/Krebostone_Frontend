@@ -3,7 +3,7 @@
 </script>
 <template>
 <div class="container">
-    This is the app container
+    <slot></slot>
 </div>
 </template>
 <style>
@@ -16,5 +16,6 @@
     background-color: white;
     flex: auto;
     height: 90%;
+    overflow-y: auto;
 }
 </style>
