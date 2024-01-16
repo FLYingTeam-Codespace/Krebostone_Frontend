@@ -15,7 +15,7 @@ function autoLogin() {
     loginWithToken(address, token).then((res) => {
       console.log(res)
       message.success("登录成功！")
-      router.push("/app")
+      router.push("/app/dashboard")
     }).catch((err) => {
       console.log(err)
       message.error("自动登录失败")

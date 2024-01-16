@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
+    margin-left: 0px;
     padding: 30px;
     border-radius: 7px;
     background-color: white;
