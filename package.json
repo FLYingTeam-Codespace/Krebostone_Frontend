@@ -16,6 +16,7 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vueup/vue-quill": "^1.2.0",
     "ant-design-vue": "^4.1.0"
   }
 }

@@ -31,4 +31,19 @@ function loginWithToken(serverAddress, token) {
     })
 }
 
-export { login, loginWithToken }
+function getUserInfo() {
+    return new Promise((resolve, reject) => {
+        axios.post(`${localStorage.getItem("krebostone:serverAddress")}/users/getUserInfo`, {}, {
+            headers: {
+                "Authorization": localStorage.getItem("krebostone:token")
+            }
+        
+        }).then((response) => {
+            resolve(response.data);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
+export { login, loginWithToken, getUserInfo }

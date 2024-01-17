@@ -2,7 +2,7 @@
 import {Button, TypographyTitle, Input, message, Modal} from "ant-design-vue";
 import ServerList from "../ServerList.vue";
 import {getServerStatus} from "../../js/Requests/Server.js"
-import {login} from "../../js/Requests/Users.js"
+import {login, getUserInfo} from "../../js/Requests/Users.js"
 import {removeSavedServer, createServerInstance} from "../../js/savedServerManager.js"
 import {cacheToken} from "../../js/users.js"
 import {ref} from "vue"
@@ -44,6 +44,12 @@ function handleLogin() {
             message.success("登录成功！")
             cacheToken(res.data.data.token)
             isLoggingIn.value = false
+            // saveUserID
+            getUserInfo().then((res) => {
+                console.log(res)
+                localStorage.setItem("krebostone:userID", res.data.id)
+                localStorage.setItem("krebostone:isAdmin", res.data.admin)
+            })
             router.push("/app/dashboard")
             
         }).catch((err) => {
