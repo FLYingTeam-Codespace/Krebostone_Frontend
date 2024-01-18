@@ -15,4 +15,22 @@ function getServerStatus(serverAddress, serverPort) {
     })
 }
 
-export { getServerStatus };
+function getKrebostoneServerInfo() {
+    return new Promise((resolve, reject) => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('krebostone:token')
+            },
+        }
+        axios.post(`${localStorage.getItem('krebostone:serverAddress')}/server/getAll`, {}, config)
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            })
+    })
+}
+
+export { getServerStatus, getKrebostoneServerInfo };

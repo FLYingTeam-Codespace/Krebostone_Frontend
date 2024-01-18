@@ -24,8 +24,19 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.1s;
+    color: black;
+    text-decoration: none;
 }
 .app-btn-container:hover {
     background-color: #0062c33f;
+}
+.title {
+    text-decoration: none;
+}
+.router-link-active {
+    text-decoration: none;
+}
+.router-link-inactive {
+    text-decoration: none;
 }
 </style>

@@ -4,22 +4,26 @@ import {CloudServerOutlined, DesktopOutlined, UserOutlined} from "@ant-design/ic
 </script>
 <template>
 <div class="app-shelf-container">
-    <appShelfIcon>
-        <template #icon>
-            <DesktopOutlined style="font-size: 30px;"/>
-        </template>
-        <template #title>
-            总览
-        </template>
-    </appShelfIcon>
-    <appShelfIcon>
-        <template #icon>
-            <CloudServerOutlined style="font-size: 30px;"/>
-        </template>
-        <template #title>
-            服务器
-        </template>
-    </appShelfIcon>
+    <RouterLink to="/app/dashboard">
+        <appShelfIcon>
+            <template #icon>
+                <DesktopOutlined style="font-size: 30px;"/>
+            </template>
+            <template #title>
+                总览
+            </template>
+        </appShelfIcon>
+    </RouterLink>
+    <RouterLink to="/app/server">
+        <appShelfIcon>
+            <template #icon>
+                <CloudServerOutlined style="font-size: 30px;"/>
+            </template>
+            <template #title>
+                服务器
+            </template>
+        </appShelfIcon>
+    </RouterLink>
     <appShelfIcon>
         <template #icon>
             <UserOutlined style="font-size: 30px;"/>

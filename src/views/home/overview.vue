@@ -1,8 +1,9 @@
 <script setup>
-import {Card, TypographyTitle, CardMeta, Button, Avatar, List, ListItem, Drawer, Collapse, CollapsePanel, Empty, Input, message, Modal } from "ant-design-vue"
+import {Card, TypographyTitle, CardMeta, Button, Avatar, List, ListItem, Drawer, Collapse, CollapsePanel, Empty, Input, message, Modal, Row, Col } from "ant-design-vue"
 import {ref} from "vue"
 import {HomeOutlined, ExpandOutlined, DeleteOutlined, PlusCircleOutlined, ReloadOutlined, LikeOutlined, ApartmentOutlined, GlobalOutlined, HddOutlined, AppstoreAddOutlined, UserOutlined } from "@ant-design/icons-vue"
 import {getLatestBulletin, addBulletin, getAllBulletin, removeBulletin} from "../../js/Requests/Bulletin"
+import {getKrebostoneServerInfo} from "../../js/Requests/Server"
 
 const showBulletinDetails = ref(false)
 const showAddBulletinDrawer = ref(false)
@@ -12,7 +13,12 @@ const bulletinList = ref([])
 const newBulletinInfo = ref({
     title: "",
     content: ""
-
+})
+const krebostoneServerInfo = ref({
+    "name": "未知Krebostone服务器",
+    "address": "当前没有可提供的地址",
+    "port": "",
+    "core": "未知Minecraft核心",
 })
 
 function triggerBulletinDetails(selectedID) {
@@ -92,7 +98,18 @@ function handleRemoveBulletin(userID, bID) {
     })
 }
 
+function getKrebServerInfo() {
+    getKrebostoneServerInfo().then((res) => {
+        console.log(res)
+        krebostoneServerInfo.value = res.data
+    }).catch((err) => {
+        console.log(err)
+    })
+
+}
+
 getInitBulletin()
+getKrebServerInfo()
 </script>
 <template>
 <div>
@@ -104,15 +121,15 @@ getInitBulletin()
             <List>
                 <ListItem>
                     <ApartmentOutlined />
-                    服务器名称: KreboStone
+                    服务器名称: {{krebostoneServerInfo.name}}
                 </ListItem>
                 <ListItem>
                     <GlobalOutlined />
-                    服务器地址: KreboStone
+                    服务器地址: {{krebostoneServerInfo.address}}:{{krebostoneServerInfo.port}}
                 </ListItem>
                 <ListItem>
                     <HddOutlined />
-                    服务器核心: KreboStone
+                    服务器核心: {{krebostoneServerInfo.core}}
                 </ListItem>
                 <ListItem>
                     <AppstoreAddOutlined />
@@ -121,7 +138,32 @@ getInitBulletin()
             </List>
         </Card>
         <Card title="资源中心" style="margin-top: 5px">
-            <Empty/>
+            <Row :gutter="16">
+                <Col :span="8">
+                    <Card :hoverable="true">
+                        <template #cover>
+                            <img src="../../assets/ModsDownloadCover.svg"/>
+                        </template>
+                        <CardMeta title="Mod下载" description="获取本服务器所使用的Mod"/>
+                    </Card>
+                </Col>
+                <Col :span="8">
+                    <Card :hoverable="true">
+                        <template #cover>
+                            <img src="../../assets/SavesDownloadCover.svg"/>
+                        </template>
+                        <CardMeta title="存档下载" description="下载服务器中备份存档"/>
+                    </Card>
+                </Col>
+                <Col :span="8">
+                    <Card :hoverable="true">
+                        <template #cover>
+                            <img src="../../assets/UploadChannelCover.svg"/>
+                        </template>
+                        <CardMeta title="上传通道" description="向服务器上传文件"/>
+                    </Card>
+                </Col>
+            </Row>
         </Card>
     </div>
     <div class="cardsRow" style="flex: 3">

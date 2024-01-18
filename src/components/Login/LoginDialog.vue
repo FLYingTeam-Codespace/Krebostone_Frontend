@@ -1,7 +1,7 @@
 <script setup>
 import {Button, TypographyTitle, Input, message, Modal} from "ant-design-vue";
 import ServerList from "../ServerList.vue";
-import {getServerStatus} from "../../js/Requests/Server.js"
+import {getServerStatus, getKrebostoneServerInfo} from "../../js/Requests/Server.js"
 import {login, getUserInfo} from "../../js/Requests/Users.js"
 import {removeSavedServer, createServerInstance} from "../../js/savedServerManager.js"
 import {cacheToken} from "../../js/users.js"
@@ -50,6 +50,13 @@ function handleLogin() {
                 localStorage.setItem("krebostone:userID", res.data.id)
                 localStorage.setItem("krebostone:isAdmin", res.data.admin)
             })
+            // check reset password
+            if (res.data.data.needReset === true) {
+                Modal.info({
+                    title: "需要重置密码",
+                    content: "貌似您当前的密码是初始密码，为了您的账户安全，请重置密码。"
+                })
+            }
             router.push("/app/dashboard")
             
         }).catch((err) => {

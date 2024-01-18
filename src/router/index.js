@@ -16,6 +16,11 @@ const routes = [
         path: "dashboard",
         name: "dashboard",
         component: () => import("../views/home/overview.vue")
+      },
+      {
+        path: "server",
+        name: "server",
+        component: () => import("../views/server/serverHome.vue")
       }
     ],
   }
