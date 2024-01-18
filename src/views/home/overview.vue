@@ -1,7 +1,7 @@
 <script setup>
 import {Card, TypographyTitle, CardMeta, Button, Avatar, List, ListItem, Drawer, Collapse, CollapsePanel, Empty, Input, message, Modal } from "ant-design-vue"
 import {ref} from "vue"
-import {HomeOutlined, ExpandOutlined, DeleteOutlined, PlusCircleOutlined, ReloadOutlined, LikeOutlined, ApartmentOutlined, GlobalOutlined, HddOutlined, AppstoreAddOutlined } from "@ant-design/icons-vue"
+import {HomeOutlined, ExpandOutlined, DeleteOutlined, PlusCircleOutlined, ReloadOutlined, LikeOutlined, ApartmentOutlined, GlobalOutlined, HddOutlined, AppstoreAddOutlined, UserOutlined } from "@ant-design/icons-vue"
 import {getLatestBulletin, addBulletin, getAllBulletin, removeBulletin} from "../../js/Requests/Bulletin"
 
 const showBulletinDetails = ref(false)
@@ -132,7 +132,9 @@ getInitBulletin()
             <Card hoverable style="margin-bottom: 10px;" v-for="i in bulletinList">
                 <CardMeta :title="i.title" :description="i.date">
                     <template #avatar>
-                        <Avatar/>
+                        <Avatar>
+                            <UserOutlined />
+                        </Avatar>
                     </template>
                 </CardMeta>
                 <div style="margin-top: 20px; font-size: 15px;" v-html="i.content">
